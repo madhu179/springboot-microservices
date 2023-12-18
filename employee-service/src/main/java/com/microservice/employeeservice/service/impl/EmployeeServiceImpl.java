@@ -1,5 +1,6 @@
 package com.microservice.employeeservice.service.impl;
 
+import com.microservice.employeeservice.service.APIClient;
 import lombok.AllArgsConstructor;
 import com.microservice.employeeservice.dto.APIResponseDto;
 import com.microservice.employeeservice.dto.DepartmentDto;
@@ -22,7 +23,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeServiceImpl.class);
     private EmployeeRepository employeeRepository;
 //    private RestTemplate restTemplate;
-    private WebClient webClient;
+//    private WebClient webClient;x
+    private APIClient apiClient;
 
     @Override
     public EmployeeDto saveEmployee(EmployeeDto employeeDto) {
@@ -43,11 +45,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = employeeRepository.findById(employeeId).get();
 //        DepartmentDto departmentDto = restTemplate.getForEntity("http://localhost:8080/api/departments/"+employee.getDepartmentCode(),
 //                DepartmentDto.class).getBody();
-        DepartmentDto departmentDto = webClient.get()
-                .uri("http://localhost:8080/api/departments/"+employee.getDepartmentCode())
-                .retrieve()
-                .bodyToMono(DepartmentDto.class)
-                .block();
+
+//        DepartmentDto departmentDto = webClient.get()
+//                .uri("http://localhost:8080/api/departments/"+employee.getDepartmentCode())
+//                .retrieve()
+//                .bodyToMono(DepartmentDto.class)
+//                .block();
+
+        DepartmentDto departmentDto = apiClient.getDepartment(employee.getDepartmentCode());
 
         EmployeeDto employeeDto = EmployeeMapper.mapToEmployeeDto(employee);
 
