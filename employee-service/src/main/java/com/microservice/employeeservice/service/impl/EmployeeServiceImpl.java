@@ -1,6 +1,7 @@
 package com.microservice.employeeservice.service.impl;
 
 import com.microservice.employeeservice.service.APIClient;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.AllArgsConstructor;
 import com.microservice.employeeservice.dto.APIResponseDto;
 import com.microservice.employeeservice.dto.DepartmentDto;
@@ -38,6 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return savedEmployeeDto;
     }
 
+//    @CircuitBreaker(name ="${spring.application.name}", fallbackMethod = "getDefaultDepartment")
     @Override
     public APIResponseDto getEmployeeById(Long employeeId) {
 
