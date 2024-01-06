@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 //@FeignClient(url = "http://localhost:8080/", value = "DEPARTMENT-SERVICE")
-@FeignClient(name = "DEPRATMENT-SERVICE")
+//@FeignClient(name = "DEPRATMENT-SERVICE")
+@FeignClient(name = "depratment-services")
 public interface APIClient {
 
 
