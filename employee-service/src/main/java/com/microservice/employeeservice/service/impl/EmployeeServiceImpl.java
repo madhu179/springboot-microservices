@@ -39,7 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return savedEmployeeDto;
     }
 
-//    @CircuitBreaker(name ="${spring.application.name}", fallbackMethod = "getDefaultDepartment")
+    @CircuitBreaker(name ="${spring.application.name}", fallbackMethod = "getDefaultDepartment")
     @Override
     public APIResponseDto getEmployeeById(Long employeeId) {
 
@@ -65,7 +65,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return apiResponseDto;
     }
 
-    public APIResponseDto getDefaultDepartment(Long employeeId, Exception exception) {
+    public APIResponseDto getDefaultDepartment(Long employeeId) {
 
         LOGGER.info("inside getDefaultDepartment() method");
 
