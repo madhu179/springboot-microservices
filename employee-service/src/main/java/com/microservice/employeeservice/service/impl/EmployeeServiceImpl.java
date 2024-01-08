@@ -65,7 +65,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return apiResponseDto;
     }
 
-    public APIResponseDto getDefaultDepartment(Long employeeId) {
+    public APIResponseDto getDefaultDepartment(Long employeeId, Exception e) {
 
         LOGGER.info("inside getDefaultDepartment() method");
 
