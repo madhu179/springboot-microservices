@@ -1,5 +1,6 @@
 package com.microservice.employeeservice.service.impl;
 
+import com.microservice.employeeservice.dto.OrganizationDto;
 import com.microservice.employeeservice.service.APIClient;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
@@ -25,7 +26,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeServiceImpl.class);
     private EmployeeRepository employeeRepository;
 //    private RestTemplate restTemplate;
-//    private WebClient webClient;x
+    private WebClient webClient;
     private APIClient apiClient;
 
     @Override
@@ -58,12 +59,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         DepartmentDto departmentDto = apiClient.getDepartment(employee.getDepartmentCode());
 
+        OrganizationDto organizationDto = webClient.get()
+                .uri("http://localhost:8083/api/organizations/"+employee.getOrganizationCode())
+                .retrieve()
+                .bodyToMono(OrganizationDto.class)
+                .block();
+
         EmployeeDto employeeDto = EmployeeMapper.mapToEmployeeDto(employee);
 
         APIResponseDto apiResponseDto = new APIResponseDto();
         apiResponseDto.setEmployee(employeeDto);
         apiResponseDto.setDepartment(departmentDto);
-//        apiResponseDto.setOrganization(organizationDto);
+        apiResponseDto.setOrganization(organizationDto);
         return apiResponseDto;
     }
 
