@@ -21,4 +21,11 @@ public class OrganizationController {
         return new ResponseEntity<>(savedOrganization, HttpStatus.CREATED);
     }
 
+    // Build Get Organization by Code REST API
+    @GetMapping("{code}")
+    public ResponseEntity<OrganizationDTO> getOrganization(@PathVariable("code") String organizationCode){
+        OrganizationDTO organizationDTO = organizationService.getOrganizationByCode(organizationCode);
+        return ResponseEntity.ok(organizationDTO);
+    }
+
 }
