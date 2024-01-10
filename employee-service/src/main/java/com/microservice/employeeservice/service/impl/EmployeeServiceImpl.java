@@ -2,6 +2,7 @@ package com.microservice.employeeservice.service.impl;
 
 import com.microservice.employeeservice.dto.OrganizationDto;
 import com.microservice.employeeservice.service.APIClient;
+import com.microservice.employeeservice.service.OrganizationAPIClient;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.AllArgsConstructor;
@@ -26,8 +27,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeServiceImpl.class);
     private EmployeeRepository employeeRepository;
 //    private RestTemplate restTemplate;
-    private WebClient webClient;
+//    private WebClient webClient;
     private APIClient apiClient;
+
+    private OrganizationAPIClient organizationAPIClient;
 
     @Override
     public EmployeeDto saveEmployee(EmployeeDto employeeDto) {
@@ -59,11 +62,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         DepartmentDto departmentDto = apiClient.getDepartment(employee.getDepartmentCode());
 
-        OrganizationDto organizationDto = webClient.get()
-                .uri("http://localhost:8083/api/organizations/"+employee.getOrganizationCode())
-                .retrieve()
-                .bodyToMono(OrganizationDto.class)
-                .block();
+//        OrganizationDto organizationDto = webClient.get()
+//                .uri("http://localhost:8083/api/organizations/"+employee.getOrganizationCode())
+//                .retrieve()
+//                .bodyToMono(OrganizationDto.class)
+//                .block();
+
+        OrganizationDto organizationDto = organizationAPIClient.getOrganization(employee.getOrganizationCode());
 
         EmployeeDto employeeDto = EmployeeMapper.mapToEmployeeDto(employee);
 
