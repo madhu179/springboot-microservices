@@ -18,3 +18,4 @@ npx create-react-app react-ui
 
 npm install bootstrap --save
 
+npm install axios --save
