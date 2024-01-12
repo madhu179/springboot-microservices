@@ -1,3 +1,6 @@
+swagger link : http://localhost:8080/swagger-ui/index.html
+json api : http://localhost:8080/v3/api-docs
+
 Package the module as a jar and the execute the following command in terminal for an extra instance of the module
 java -jar target/depratment-service-0.0.1-SNAPSHOT.jar --server.port=8082
 
