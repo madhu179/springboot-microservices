@@ -21,12 +21,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 				),
 				license = @License(
 						name = "Apache 2.0",
-						url = "https://www.devvw.com"
+						url = "https://www.devvw.com/license"
 				)
 		),
 		externalDocs = @ExternalDocumentation(
 				description = "Department-Service Doc",
-				url = "https://www.devvw.com"
+				url = "https://www.devvw.com/Department-Service.html"
 		)
 )
 @SpringBootApplication
